@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#0b0f14" />
+    <meta
+      name="description"
+      content="A fast, private chat client for NVIDIA NIM models. Your API key never leaves your browser."
+    />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <title>NIM Chat — NVIDIA NIM client</title>
+    <script>
+      // Applies the saved theme before the first paint so there is no flash.
+      // The key name must stay in sync with STORAGE_KEYS.settings in
+      // src/storage/keys.ts.
+      (function () {
+        try {
+          var raw = localStorage.getItem('nim-chat:settings:v1');
+          var theme = raw ? JSON.parse(raw).theme : null;
+          var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          var resolved = theme === 'light' || theme === 'dark' ? theme : system;
+          document.documentElement.dataset.theme = resolved;
+          document.documentElement.style.colorScheme = resolved;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding: 2rem; font-family: system-ui, sans-serif">
+        NIM Chat needs JavaScript enabled to run.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
