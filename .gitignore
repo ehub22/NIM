@@ -1,0 +1,19 @@
+node_modules
+dist
+dist-ssr
+coverage
+.DS_Store
+*.log
+npm-debug.log*
+*.tsbuildinfo
+.vite
+
+# Environment files may contain configuration, never commit real ones.
+.env
+.env.*
+!.env.example
+
+# Never commit API keys or editor secrets.
+*.pem
+.env.local
+.env.*.local
